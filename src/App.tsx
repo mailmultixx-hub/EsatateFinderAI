@@ -6,7 +6,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Send, Bot, User, Building2, MapPin, Train, Loader2, Sparkles, Home, X, Maximize2, ExternalLink, Bookmark, CheckCircle2, Waves } from 'lucide-react';
-import { chatWithAssistant } from './services/geminiService';
+// Removed Gemini import
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -15,14 +15,18 @@ interface Message {
   content: string;
 }
 
-interface Property {
-  name: string;
+interface PropertyData {
   id: string;
+  name: string;
+  location: string;
   price: string;
   size: string;
   bhk: string;
-  transit: string;
   amenities: string;
+  transit: string;
+}
+
+interface Property extends PropertyData {
   insight: string;
   image?: string;
 }
@@ -32,17 +36,58 @@ export default function App() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
-  const [listingsCsv, setListingsCsv] = useState<string>('');
+  const [listings, setListings] = useState<PropertyData[]>([]);
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [savedProperties, setSavedProperties] = useState<Property[]>([]);
   const [showSavedView, setShowSavedView] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const steps = [
-    { label: "Identifying properties...", icon: <Building2 className="w-3 h-3 text-indigo-500" /> },
-    { label: "Analyzing transit & value...", icon: <Train className="w-3 h-3 text-indigo-500" /> },
-    { label: "Preparing recommendation...", icon: <Sparkles className="w-3 h-3 text-indigo-500" /> }
+    { label: "Scanning database...", icon: <Building2 className="w-3 h-3 text-indigo-500" /> },
+    { label: "Matching preferences...", icon: <Train className="w-3 h-3 text-indigo-500" /> },
+    { label: "Finalizing results...", icon: <Sparkles className="w-3 h-3 text-indigo-500" /> }
   ];
+
+  const parseCSV = (csv: string): PropertyData[] => {
+    const lines = csv.split('\n');
+    const result: PropertyData[] = [];
+    
+    for (let i = 1; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (!line) continue;
+      
+      // Simple CSV parser for quoted strings
+      const parts: string[] = [];
+      let current = '';
+      let inQuotes = false;
+      
+      for (let j = 0; j < line.length; j++) {
+        const char = line[j];
+        if (char === '"') inQuotes = !inQuotes;
+        else if (char === ',' && !inQuotes) {
+          parts.push(current);
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+      parts.push(current);
+
+      if (parts.length >= 8) {
+        result.push({
+          id: parts[0],
+          name: parts[1],
+          location: parts[2],
+          price: parts[3],
+          size: parts[4],
+          bhk: parts[5],
+          amenities: parts[6],
+          transit: parts[7]
+        });
+      }
+    }
+    return result;
+  };
 
   // Persistence: Load from LocalStorage
   useEffect(() => {
@@ -57,7 +102,7 @@ export default function App() {
       setMessages([
         {
           role: 'assistant',
-          content: "Welcome to NCR Estate AI. Tell me your budget and preferred location in Delhi, Gurgaon, or Noida."
+          content: "Welcome to NCR Estate. I can help you find properties in Delhi, Gurgaon, or Noida directly from our verified database. What are you looking for today?"
         }
       ]);
     }
@@ -73,7 +118,9 @@ export default function App() {
 
     fetch('/listings.csv')
       .then(res => res.text())
-      .then(data => setListingsCsv(data))
+      .then(data => {
+        setListings(parseCSV(data));
+      })
       .catch(err => console.error("Failed to load data:", err));
   }, []);
 
@@ -114,19 +161,74 @@ export default function App() {
       .split('|')
       .map(p => p.trim());
     
-    if (parts.length < 8) return null;
+    if (parts.length < 9) return null;
 
     return {
       name: parts[0],
       id: parts[1],
-      price: parts[2],
-      size: parts[3],
-      bhk: parts[4],
-      transit: parts[5],
-      amenities: parts[6],
-      insight: parts[7],
+      location: parts[2],
+      price: parts[3],
+      size: parts[4],
+      bhk: parts[5],
+      transit: parts[6],
+      amenities: parts[7],
+      insight: parts[8],
       image: getPropertyImage(parts[0])
     };
+  };
+
+  const performLocalSearch = (query: string): string => {
+    const q = query.toLowerCase();
+    
+    // Extract potential constraints
+    const hasNoida = q.includes('noida');
+    const hasGGN = q.includes('gurgaon') || q.includes('ggn');
+    const hasDelhi = q.includes('delhi');
+    const bhkMatch = q.match(/(\d)\s*bhk/);
+    const bhk = bhkMatch ? bhkMatch[1] : null;
+
+    // Filter listings
+    let filtered = listings.filter(item => {
+      let match = true;
+      if (hasNoida && !item.location.toLowerCase().includes('noida')) match = false;
+      if (hasGGN && !item.location.toLowerCase().includes('gurgaon')) match = false;
+      if (hasDelhi && !item.location.toLowerCase().includes('delhi')) match = false;
+      if (bhk && item.bhk !== bhk) match = false;
+      
+      // Basic fallback: if no specific match, try keyword search
+      if (!hasNoida && !hasGGN && !hasDelhi && !bhk) {
+        match = item.name.toLowerCase().includes(q) || 
+                item.location.toLowerCase().includes(q) || 
+                item.amenities.toLowerCase().includes(q);
+      }
+      
+      return match;
+    });
+
+    if (filtered.length === 0) {
+      return "I couldn't find any properties matching those specific criteria in our database. Try searching for a location like 'Gurgaon' or 'Noida', or specify a BHK requirement.";
+    }
+
+    // Limit to top 3 for the chat response
+    const topMatches = filtered.slice(0, 3);
+    
+    let response = `Based on your search for "${query}", I've found ${filtered.length} matching properties in our database. Here are the top recommendations:\n\n`;
+    
+    topMatches.forEach(item => {
+      const insight = `Excellent project in ${item.location} with premium ${item.amenities.split(',')[0]} facilities.`;
+      response += `[PROPERTY_CARD: ${item.name} | ${item.id} | ${item.location} | ${item.price} | ${item.size} | ${item.bhk} | ${item.transit} | ${item.amenities} | ${insight}]\n\n`;
+    });
+
+    // Add a comparison table
+    response += `### Market Comparison\n\n| Feature | ${topMatches.map(m => m.name).join(' | ')} |\n`;
+    response += `| :--- | ${topMatches.map(() => ':---').join(' | ')} |\n`;
+    response += `| **Monthly Rent** | ${topMatches.map(m => m.price).join(' | ')} |\n`;
+    response += `| **BHK Layout** | ${topMatches.map(m => m.bhk + ' BHK').join(' | ')} |\n`;
+    response += `| **Transit Time** | ${topMatches.map(m => m.transit + 'm walk').join(' | ')} |\n\n`;
+
+    response += `**Verdict**: These properties represent the best value in ${hasNoida ? 'Noida' : hasGGN ? 'Gurgaon' : hasDelhi ? 'Delhi' : 'the NCR region'} based on your requirements.`;
+
+    return response;
   };
 
   useEffect(() => {
@@ -135,7 +237,7 @@ export default function App() {
       setLoadingStep(0);
       interval = setInterval(() => {
         setLoadingStep(prev => prev < steps.length - 1 ? prev + 1 : prev);
-      }, 2000);
+      }, 800); // Faster loading for local search
     }
     return () => clearInterval(interval);
   }, [isLoading]);
@@ -152,15 +254,13 @@ export default function App() {
     setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
     setIsLoading(true);
 
-    try {
-      const response = await chatWithAssistant(userMsg, listingsCsv);
+    // Simulate search latency for UX
+    setTimeout(() => {
+      const response = performLocalSearch(userMsg);
       setMessages(prev => [...prev, { role: 'assistant', content: response }]);
-    } catch (error) {
-      setMessages(prev => [...prev, { role: 'assistant', content: "I encountered a search error. Please try again." }]);
-    } finally {
       setIsLoading(false);
       setLoadingStep(0);
-    }
+    }, 2400);
   };
 
   return (
@@ -230,23 +330,32 @@ export default function App() {
           </div>
         </header>
 
-        <section className="px-6 lg:px-12 py-8 bg-slate-50/50 border-b border-slate-100">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { step: "01", title: "Analyze Requirements", desc: "We process your budget, location, and BHK preferences across the NCR region." },
-              { step: "02", title: "Scan Real-Time Data", desc: "Our AI cross-references thousands of listings with transit data and market trends." },
-              { step: "03", title: "Smart Recommendation", desc: "Get curated matches with comparison tables and expert advisor insights." }
-            ].map((item, idx) => (
-              <div key={idx} className="flex gap-4">
-                <span className="text-2xl font-black text-slate-200 italic leading-none">{item.step}</span>
-                <div className="space-y-1">
-                  <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest">{item.title}</h4>
-                  <p className="text-[11px] text-slate-500 font-medium leading-relaxed">{item.desc}</p>
-                </div>
+        <AnimatePresence>
+          {messages.length <= 1 && (
+            <motion.section 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="px-6 lg:px-12 py-4 bg-slate-50 border-b border-slate-100 overflow-hidden"
+            >
+              <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  { step: "01", title: "Analyze", desc: "Requirements & budget mapping." },
+                  { step: "02", title: "Scan", desc: "Real-time database matching." },
+                  { step: "03", title: "Match", desc: "Curated Recommendations." }
+                ].map((item, idx) => (
+                  <div key={idx} className="flex gap-3 items-center">
+                    <span className="text-xl font-black text-slate-200 italic leading-none">{item.step}</span>
+                    <div className="space-y-0.5">
+                      <h4 className="text-[10px] font-black text-slate-900 uppercase tracking-widest">{item.title}</h4>
+                      <p className="text-[9px] text-slate-400 font-bold leading-tight">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
+            </motion.section>
+          )}
+        </AnimatePresence>
 
         {/* Chat Messages */}
         <div className="flex-1 overflow-y-auto px-4 py-8 lg:p-10 space-y-12 scroll-smooth">

@@ -1,0 +1,101 @@
+Property_ID,Name,Location,Price,Size_sqft,BHK,Amenities,Distance_to_Transit
+P001,DLF The Aralias,Gurgaon Sector 42,₹1.5L,4500,4,"Clubhouse, Pool, Spa",8
+P002,M3M Golf Estate,Gurgaon Sector 65,₹1.2L,3200,3,"Golf Course, Gym, Concierge",12
+P003,Ambience Caitriona,Gurgaon NH-8,₹2.0L,5000,4,"Private Elevators, Park, Security",5
+P004,Godrej South Estate,Okhla South Delhi,₹85k,1800,2,"Air Purification, Garden",6
+P005,Jaypee Greens-The Castille,Greater Noida,₹45k,2100,3,"Golf View, Club, Parking",15
+P006,Vatika City,Gurgaon Sector 49,₹40k,1600,2,"Market, Schools nearby, Gym",10
+P007,EMAAR Palm Drive,Gurgaon Sector 66,₹65k,2200,3,"Sports Facilities, Pool",11
+P008,The Magnolias,Gurgaon Sector 42,₹3.5L,6000,5,"Ultra Luxury, Full Service",7
+P009,Ats Knightsbridge,Noida Sector 124,₹1.8L,6000,4,"Large Decks, Private Lift",9
+P010,Mahagun Moderne,Noida Sector 78,₹35k,1250,2,"Central Park, Convenience Store",5
+P011,Paras Quartier,Gurgaon Gwal Pahari,₹1.2L,5000,4,"Sky Lounge, Private Clubhouse",14
+P012,The Leela Sky Villas,Kirti Nagar Delhi,₹1.1L,2400,3,"Hotel Managed, High End",4
+P013,M3M Merlin,Gurgaon Sector 67,₹55k,1800,3,"Tri-side Open, Gym, Pool",10
+P014,Bestech Park View Spa,Gurgaon Sector 47,₹50k,2350,3,"Spa, Salon, Club",8
+P015,Omaxe Forest Spa,Noida Sector 93B,₹60k,2500,4,"Forest View, Clubhouse",11
+P016,Vipul Belmonte,Gurgaon Golf Course Road,₹75k,2450,3,"Prime Location, Security",7
+P017,Sushant Estate,Gurgaon Sector 52,₹38k,1400,2,"Market Near, Gated",9
+P018,Exotica Dreamville,Greater Noida West,₹22k,1100,2,"Affordable, Park, Clubhouse",15
+P019,Supertech North Eye,Noida Sector 74,₹45k,1500,2,"Helipad, High Rise",12
+P020,Birla Navya,Gurgaon Sector 63A,₹80k,2200,3,"Low Rise, Gated, Gym",8
+P021,Emaar DigiHomes,Gurgaon Sector 62,₹70k,1500,2,"Voice Command, Smart Home",10
+P022,Tata Primanti,Gurgaon Sector 72,₹95k,2500,3,"Villas, Penthouses, Spa",11
+P023,Risland Sky Mansion,Chhattarpur Delhi,₹1.6L,3300,3,"Smart Tech, Prime Location",6
+P024,Prateek Edifice,Noida Sector 107,₹55k,2100,3,"Luxury Finishing, Pool",7
+P025,Unitech Cascades,Greater Noida,₹28k,1350,2,"Open Area, Security",18
+P026,Sobha International City,Gurgaon Sector 109,₹1.3L,4000,4,"Villa Life, Large Garden",20
+P027,Godrej Woods,Noida Sector 43,₹75k,2000,3,"Urban Forest, Pool, Gym",5
+P028,Experion Windchants,Gurgaon Sector 112,₹1.1L,3000,3,"Skywalk, Low Density",12
+P029,Lotus Boulevard,Noida Sector 100,₹42k,1600,3,"Green Building, IGBC",8
+P030,Mapsko Mount Ville,Gurgaon Sector 79,₹35k,1450,2,"Aravali View, Balcony",15
+P031,M3M Soulitude,Gurgaon Sector 89,₹48k,1200,2,"Boutique Floors, Security",14
+P032,Ace Parkway,Noida Sector 150,₹52k,1750,3,"Sports Theme, Track",9
+P033,Gulshan Dynasty,Noida Sector 144,₹1.4L,4700,4,"Hydroponics, Spa",11
+P034,SS The Leaf,Gurgaon Sector 85,₹41k,1650,2,"Modern, Clubhouse, Gym",13
+P035,Sikka Kaamna Residency,Noida Sector 143,₹32k,1200,2,"Balcony, Gated Community",7
+P036,The Crest,Gurgaon Sector 54,₹1.8L,3500,4,"Double Height Lobby, Concierge",5
+P037,Ireo Victory Valley,Gurgaon Sector 67,₹68k,2400,3,"Vertical Garden, Sky Deck",9
+P038,Wave One,Noida Sector 18,₹90k,2000,3,"Office cum Residential, Hub",2
+P039,Gaur City,Greater Noida West,₹20k,1050,2,"Large Township, Schools",17
+P040,Cleo County,Noida Sector 121,₹48k,1800,3,"Egyptian Theme, Pool",10
+P041,Godrej Meridien,Gurgaon Sector 106,₹85k,2000,3,"Cinema, Fine Dining inside",8
+P042,The Grand Arch,Gurgaon Sector 58,₹70k,2100,3,"Unique Architecture, Security",9
+P043,Mahagun Mezzaria,Noida Sector 78,₹62k,2300,3,"Double Height Ceiling, Luxury",6
+P044,ATS One Hamlet,Noida Sector 104,₹58k,1750,3,"Prime Area, High Rental",5
+P045,Orris Aster Court,Gurgaon Sector 85,₹33k,1300,2,"Green Layout, Club",14
+P046,Victory Ace,Noida Sector 143,₹36k,1450,3,"High Tech, Pool",11
+P047,Puri Emerald Bay,Gurgaon Sector 104,₹65k,2000,3,"Villas, Gated, Gym",8
+P048,Conscient Heritage One,Gurgaon Sector 62,₹60k,2200,3,"Location choice, Spa",10
+P049,Eldeco Utopia,Noida Sector 93A,₹55k,2100,3,"Established Community, Green",6
+P050,Suncity Vatsal Valley,Gurgaon Gwal Pahari,₹52k,1300,2,"Low Rise, Forest Edge",15
+P051,Mahagun Marvella,Noida Sector 78,₹65k,2500,4,"Sky Villas, Luxury",7
+P052,WTC CBD,Gurgaon Sector 109,₹38k,1400,2,"Near International Airport",12
+P053,Hero Homes,Gurgaon Sector 104,₹45k,1350,2,"Wellness, Smart Devices",8
+P054,Prtateek Stylome,Noida Sector 45,₹52k,1850,3,"High End finishing, Pool",10
+P055,Gaur Mulberry Mansions,Greater Noida,₹2.2L,8000,6,"Ultra Luxury, Farmhouse style",25
+P056,GreatValue Sharanam,Noida Sector 107,₹38k,1450,2,"Quiet, Security",9
+P057,Express Astra,Greater Noida West,₹26k,1250,2,"Modern, Track, Club",16
+P058,La Lagune,Gurgaon Sector 54,₹1.4L,3100,4,"Premium Living, Golf Road",6
+P059,Unitech Heritage City,Gurgaon MG Road,₹85k,2400,3,"Walking to Metro, Prime",2
+P060,Signature Global Floors,Gurgaon Sector 37D,₹32k,1100,2,"Stilt Parking, Gated",13
+P061,Spaze Privy,Gurgaon Sector 72,₹44k,1700,3,"Modern, Pool, Gym",10
+P062,Omaxe Twin Towers,Noida Sector 50,₹48k,1900,3,"Central Location, Market",5
+P063,Today Blossoms,Gurgaon Sector 47,₹38k,1400,2,"Quiet Area, Storage",11
+P064,Bestech Park View Residency,Gurgaon Sector 3,₹42k,1650,3,"Good Connectivity Delhi",10
+P065,ATS Pristine,Noida Sector 150,₹65k,2300,3,"Green Zone, Low Density",12
+P066,ACE Golfshire,Noida Sector 150,₹50k,1850,3,"Theme Garden, Sports",11
+P067,Victory Crossroads,Gurgaon Sector 95,₹28k,1200,2,"Value for Money, Gated",15
+P068,BPTP Park Serene,Gurgaon Sector 37D,₹30k,1300,2,"Club, Gym, Security",12
+P069,Emaar Imperial Gardens,Gurgaon Sector 102,₹55k,2000,3,"Open spaces, Club",9
+P070,Godrej Prive,Gurgaon Sector 106,₹78k,2200,3,"Luxury Lifestyle, Spa",7
+P071,Shapoorji Vicinia,Gurgaon Sector 102,₹42k,1500,2,"Trust, Modern Build",10
+P072,Antriksh Golf View,Noida Sector 78,₹34k,1350,3,"Convenient, Market near",6
+P073,Sikka Karnam,Noida Sector 143,₹28k,1150,2,"Balcony, AC, Gym",14
+P074,Paramount Golf Foreste,Greater Noida,₹32k,1700,3,"Golf theme, Villas",20
+P075,Samridhi Grand Avenue,Greater Noida West,₹24k,1200,2,"Clubhouse, Pool",16
+P076,Gaur Saundaryam,Greater Noida West,₹45k,1900,3,"Premium feel, Layout",12
+P077,Civitech Stadia,Noida Sector 79,₹50k,1700,3,"Modern, Gated",7
+P078,Ats Allure,Yamuna Expressway,₹22k,1150,2,"Investment area, Gated",25
+P079,Supertech Capetown,Noida Sector 74,₹38k,1500,3,"Large Layout, Gym",11
+P080,Prateek Wisteria,Noida Sector 77,₹35k,1400,2,"Family orientied, Market",6
+P081,Jaypee Greens-Sea Court,Greater Noida,₹55k,2200,3,"Upscale, Near Pari Chowk",18
+P082,Omaxe Grand,Noida Sector 93B,₹48k,1900,3,"Good Maintenance, Club",11
+P083,M3M Urbana,Gurgaon Sector 67,₹62k,1700,2,"Mixed use, Trendy",1
+P084,Ambience Tiverton,Noida Sector 50,₹1.1L,3200,3,"Prime Noida, Luxury",4
+P085,Ireo The Corridors,Gurgaon Sector 67A,₹58k,1900,3,"Large Township, Sports",12
+P086,M3M Latitude,Gurgaon Sector 65,₹95k,2400,3,"Rooftop Lounge, High Tech",9
+P087,Signature Global City,Gurgaon Sector 81,₹35k,1200,2,"Floors, High Quality",11
+P088,Mapsko Paradise,Gurgaon Sector 83,₹27k,1050,2,"Market near, Secure",14
+P089,Vatika sovereign Park,Gurgaon Sector 99,₹72k,2600,3,"Open spaces, Modern",13
+P090,M3M Sierra,Gurgaon Sector 68,₹45k,1500,2,"Lake view, Gated",11
+P091,Puri Diplomatic Greens,Gurgaon Sector 111,₹1.2L,3200,4,"DW Expressway, Prime",8
+P092,Godrej Nature Plus,Gurgaon Sohna Road,₹58k,1800,3,"Wellness, Landscape",14
+P093,Signature Global Prime,Gurgaon Sector 63A,₹36k,1200,2,"Ready to Move, Secure",10
+P094,Whiteland Blissville,Gurgaon Sector 76,₹68k,1600,2,"Low Rise, High Class",12
+P095,Emaar Gurgaon Greens,Gurgaon Sector 102,₹62k,2200,3,"Spacious, High rise",9
+P096,Adani Samsara,Gurgaon Sector 60,₹1.4L,3400,4,"Independent Floors, Prime",7
+P097,Nirala Estate,Greater Noida West,₹25k,1250,2,"Spacious Layout, Club",15
+P098,Godrej Palm Retreat,Noida Sector 150,₹72k,1900,3,"Resort style, Low rise",10
+P099,Eldeco Live by the Greens,Noida Sector 150,₹42k,1400,2,"Cricket theme, Green",11
+P100,M3M Royal Regalia,Gurgaon Sector 67,₹1.2L,2600,3,"Serviced Apts, Luxury",3
